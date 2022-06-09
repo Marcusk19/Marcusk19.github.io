@@ -1,0 +1,34 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'Marcus Kok'
+theme = "m10c"
+
+[menu]
+    [[menu.main]]
+        identifier = "home"
+        name = "Posts"
+        url = "/"
+        weight = 1
+    [[menu.main]]
+        identifier = "about"
+        name = "About"
+        url = "/about/"
+        weight = 1
+    [[menu.main]]
+        identifier = "resume"
+        name = "CV"
+        url = "/resume/"
+        weight = 1
+
+[params]
+    author = 'MarcusK'
+    description = 'I like to code and break things in Linux'
+    menu_item_separator = '|'
+    [[params.social]]
+        icon = "github"
+        name = "My Github"
+        url = "https://github.com/Marcusk19"
+    [[params.social]]
+        icon = "linkedin"
+        name = "LinkedIn"
+        url = "https://www.linkedin.com/in/marcus-kok-9a80551a3/"

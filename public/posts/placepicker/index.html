@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Place Picker // Marcus Kok</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.100.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="MarcusK" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="http://example.org/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Place Picker"/>
+<meta name="twitter:description" content="Something I always thought was cool about programming was the high-level functionality you could build into programs using other developers’ APIs. Coming from an ECE background however, I didn’t have much chance to mess around with that kind of stuff. This project was a way of getting my feet wet in working in API calls with my programs and starting to work in Python – which ended up to be much more fun than I thought."/>
+
+    <meta property="og:title" content="Place Picker" />
+<meta property="og:description" content="Something I always thought was cool about programming was the high-level functionality you could build into programs using other developers’ APIs. Coming from an ECE background however, I didn’t have much chance to mess around with that kind of stuff. This project was a way of getting my feet wet in working in API calls with my programs and starting to work in Python – which ended up to be much more fun than I thought." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/placepicker/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-26T08:47:11+01:00" />
+<meta property="article:modified_time" content="2021-12-26T08:47:11+01:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="http://example.org/"><img class="app-header-avatar" src="/avatar.jpg" alt="MarcusK" /></a>
+      <h1>Marcus Kok</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/about/">About</a>
+            |
+          
+          <a class="app-header-menu-item" href="/">Home</a>
+      </nav>
+      <p>I like to code and break things in Linux</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/Marcusk19" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://www.linkedin.com/in/marcus-kok-9a80551a3/" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Place Picker</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 26, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          5 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>Something I always thought was cool about programming was the high-level functionality you could build into programs using other developers’ APIs. Coming from an ECE background however, I didn’t have much chance to mess around with that kind of stuff. This project was a way of getting my feet wet in working in API calls with my programs and starting to work in Python – which ended up to be much more fun than I thought.</p>
+<h2 id="the-logic">The Logic</h2>
+<p><img src="https://marcuskok.tech/wp-content/uploads/2022/01/My-First-Board-1024x372.jpg" alt=""></p>
+<p><em>Simple diagram of how an API works, basically I can make a request over the internet to a web service and they can provide me with a response – this way Google can take care of all the hard work for me</em></p>
+<p>As always when I start a new project, I go to Google to help me get started. Much of the credit for this project goes to Regita H. Zakia, the writer of this article <a href="https://towardsdatascience.com/foods-around-me-google-maps-data-scraping-with-python-google-colab-588986c63db3">here</a> that I found. Reading through it gave me a better understanding of how I could get the information I wanted from Google’s API – and specifically how I could parse through the JSON response to get a name, address, and rating of restaurants nearby.</p>
+<p>Where my project differed from the one in the article above was that I wanted a simple program that could automatically gather places around me into a list without any prompting from the user and then randomly display one. In other words if I had trouble deciding on a place to eat at I could pull out my app and have somewhere suggest a location for me.</p>
+<p>To solve the problem of automatically grabbing locations for me I decided to use IpInfo’s API to get a location for me so I could then pass that location to Google’s API. More information on IpInfo can be found <a href="https://ipinfo.io/">here</a>. In order to simplify things (and force myself to work across multiple files) I broke up the logic into two .py files – ipHandler.py and placePicker.py.</p>
+<p>The ipHandler.py file had only one job, and that was to return a city and location from the current IP address.</p>
+<p>Documentation from IpInfo was really straightforward and I was able to accomplish this with only five lines (with a commented sixth line for my own debugging purposes)</p>
+<pre tabindex="0"><code>access_token = picker.config.access_token
+handler = ipinfo.getHandler(access_token)
+ip_address = get(&#39;https://api.ipify.org&#39;).content.decode(&#39;utf8&#39;)
+# print(&#39;ip: {0}&#39;.format(ip_address)) // Printing out the ip to make sure I&#39;m doing this right
+details = handler.getDetails(ip_address)
+</code></pre><p>Then all I had to do was build two simple functions to return the location from the details object:</p>
+<pre tabindex="0"><code>def get_location():
+    return details.loc
+
+def get_city():
+    return details.city
+</code></pre><p>Moving onto placePicker.py, this is where I pass in a city for my request to the Google Places API from ipHandler.py by calling the get_city() function I just wrote. Then it’s a simple matter of parsing the JSON response and putting all the restaurants into an array. After that I choose a place using a randomly generated index of the array and print it to the console. I only care about the name, address, and location, so those are the values I print from the places object obtained from the JSON. Information like latitude and longitude can stay hidden from the end user.</p>
+<pre tabindex="0"><code>def pickPlace():
+    # declare an array of places to choose from
+    all_places = []
+    keywords = [&#39;restaurant&#39;]
+    api_key = config.api_key
+    radius = &#39;1000&#39;
+    coordinates = ipHandler.get_location() # obtain coords from ip addr
+    city = ipHandler.get_city()
+    print(&#39;Searching {0} within radius {1}...&#39;.format(city, radius))
+    # print(coordinates)
+
+    for keyword in keywords:
+        url = &#39;https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=&#39;+coordinates+&#39;&amp;radius=&#39;+str(radius)+&#39;&amp;keyword=&#39;+str(keyword)+&#39;&amp;key=&#39;+str(api_key)
+        while(True):
+        # print(url)
+            respon = requests.get(url)
+            jj = json.loads(respon.text)
+            results = jj[&#39;results&#39;]
+            for result in results:
+                name = result[&#39;name&#39;]
+                place_id = result[&#39;place_id&#39;]
+                lat = result[&#39;geometry&#39;][&#39;location&#39;][&#39;lat&#39;]
+                lng = result[&#39;geometry&#39;][&#39;location&#39;][&#39;lng&#39;]
+                rating = result[&#39;rating&#39;]
+                types = result[&#39;types&#39;]
+                vicinity = result[&#39;vicinity&#39;]
+                place = [name, place_id, lat, lng, rating, types, vicinity]
+                all_places.append(place)
+
+            if &#39;next_page_token&#39; not in jj:
+                break
+            else:
+                next_page_token = jj[&#39;next_page_token&#39;]
+                url = &#39;https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=&#39;+str(api_key)+&#39;&amp;pagetoken=&#39;+str(next_page_token)
+                continue
+        labels = [&#39;Place Name&#39;, &#39;Place ID&#39;, &#39;Latitude&#39;, &#39;Longitude&#39;, &#39;Rating&#39;, &#39;Types&#39;, &#39;Vicinity&#39;]
+            #    [    0            1            2           3           4          5         6    ]
+        
+        # code that exports data to csv file if needed
+        # export_dataframe_1_medium = pd.DataFrame.from_records(all_places, columns=labels)
+        # export_dataframe_1_medium.to_csv(&#39;export_dataframe_1_medium.csv&#39;)
+        
+    x = 0
+    y = len(all_places) - 1
+    random_index = random.randint(x,y)
+
+    name = all_places[random_index][0]
+    rating = all_places[random_index][4]
+    address = all_places[random_index][6]
+    time.sleep(3)
+    # print(&#39;I suggest &#34;{0}&#34; with a rating of {1} at &#34;{2}&#34;&#39;.format(name, rating, address))
+    return &#34;I suggest &#34; + str(name) + &#34; with a rating of &#34; + str(rating) + &#34; at &#34; + str(address)
+</code></pre><h2 id="the-ui">The UI</h2>
+<p>With most of the background work done, I then started work on building a UI for my application. At the time I was thinking it would be neat to put this on an iPhone which led me to BeeWare, a set of tools to write cross platform GUI applications that you can find <a href="https://beeware.org/" title="https://docs.beeware.org/en/latest/index.html#">here</a>.</p>
+<p>Now to be honest, building user interfaces isn’t really my strong suit so I started out easy with the goal of building a simple window with a button that the user can press to suggest a place. BeeWare has some great documentation and I made use of their <a href="https://docs.beeware.org/en/latest/index.html#">getting started guide</a>. I was able to get a very rudimentary UI going with quite literally only a button to push that calls the pickPlace() method from placePicker.py.</p>
+<pre tabindex="0"><code>class Picker(toga.App):
+
+    def startup(self):
+        &#34;&#34;&#34;
+        Construct and show the Toga application.
+
+        Usually, you would add your application to a main content box.
+        We then create a main window (with a name matching the app), and
+        show the main window.
+        &#34;&#34;&#34;
+        main_box = toga.Box()
+        button = toga.Button(&#39;Choose place&#39;, on_press=self.button_handler)
+        button.style.padding = 50
+        button.style.flex = 1
+        main_box.add(button)
+        self.main_window = toga.MainWindow(title=self.formal_name)
+        self.main_window.content = main_box
+        self.main_window.show()
+
+    def button_handler(self, widget):
+        # placePicker.hello()
+        self.main_window.info_dialog(
+            placePicker.pickPlace(),
+            &#39;Thank you!&#39;
+        )
+</code></pre><p><img src="https://marcuskok.tech/wp-content/uploads/2022/01/Screen-Shot-2022-01-21-at-10.05.02-PM.png" alt=""></p>
+<p><em>My very simple interface</em></p>
+<p><img src="https://marcuskok.tech/wp-content/uploads/2022/01/Screen-Shot-2022-01-21-at-10.06.18-PM.png" alt=""></p>
+<p><em>Pop up works as intended!</em></p>
+<p>For now this is where my development of the project ends. I ran into some issues when trying to package the app for distribution and just couldn’t get around it. I’d definitely like to return to it and polish up this project in the future, but more immediate deadlines are looming on the horizon. This was a fun little project for me to work on during an afternoon and was a great learning experience. If you would like to check out the source code for this project, it’s on <a href="https://github.com/Marcusk19/Place-Picker">GitHub</a>.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
