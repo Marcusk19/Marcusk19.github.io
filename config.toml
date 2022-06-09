@@ -1,4 +1,4 @@
-baseURL = 'https://marcusk19.gitlab.io/mywebsite/'
+baseURL = 'marcusk19.gitlab.io/mywebsite/'
 languageCode = 'en-us'
 title = 'Marcus Kok'
 theme = "m10c"
