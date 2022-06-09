@@ -2,17 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Marcus Kok</title>
-    <link>http://example.org/</link>
+    <link>https://gitlab.com/Marcusk19/mywebsite/</link>
     <description>Recent content on Marcus Kok</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Jun 2022 21:57:09 +0000</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Jun 2022 21:57:09 +0000</lastBuildDate><atom:link href="https://gitlab.com/Marcusk19/mywebsite/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Resume</title>
+      <link>https://gitlab.com/Marcusk19/mywebsite/resume/</link>
+      <pubDate>Thu, 09 Jun 2022 12:27:53 -0400</pubDate>
+      
+      <guid>https://gitlab.com/Marcusk19/mywebsite/resume/</guid>
+      <description>Experience Vmware | Raleigh, NC
+Product Support Engineer (Intern) | 05/2021 - 08/2021, 01/2022 - present
+Triaged critical/major issues occuring on VMware Tanzu Platform.
+Developed internal tools for team using Golang.
+Resolved issues with Spring, MySQL, Concourse, Grafana, and more.
+Projects Wordle App
+Wordle game web app built with Spring Boot.
+MySQL backing database with JavaScript, HTML, and CSS frontend.
+PathFinder
+IOT device to get GPS directions using Raspberry Pi and Python.</description>
+    </item>
+    
     <item>
       <title>About</title>
-      <link>http://example.org/about/</link>
+      <link>https://gitlab.com/Marcusk19/mywebsite/about/</link>
       <pubDate>Wed, 08 Jun 2022 18:14:22 -0400</pubDate>
       
-      <guid>http://example.org/about/</guid>
+      <guid>https://gitlab.com/Marcusk19/mywebsite/about/</guid>
       <description>I’m currently studying Electrical and Computer Engineering at North Carolina State University.
 I also work at VMware as a co-op intern on the support team for their Tanzu platform.
 This website serves as a place where I can document some of the projects I have worked on.</description>
@@ -20,20 +38,20 @@ This website serves as a place where I can document some of the projects I have 
     
     <item>
       <title>Single GPU passthrough with AMD build</title>
-      <link>http://example.org/posts/singlegpu/</link>
+      <link>https://gitlab.com/Marcusk19/mywebsite/posts/singlegpu/</link>
       <pubDate>Wed, 08 Jun 2022 21:57:09 +0000</pubDate>
       
-      <guid>http://example.org/posts/singlegpu/</guid>
+      <guid>https://gitlab.com/Marcusk19/mywebsite/posts/singlegpu/</guid>
       <description>Recently I made the move to Arch Linux as the daily driver for my gaming rig. My reason for doing so was:
 Previously I had installed Arch on my old laptop and enjoyed the experience of having complete control over my OS I’ve found that recently I’ve been spending less time playing games on my desktop and with the recent release of the Steam Deck it seemed like the right time for me to jump ship.</description>
     </item>
     
     <item>
       <title>Spring Boot Wordle</title>
-      <link>http://example.org/posts/springwordle/</link>
+      <link>https://gitlab.com/Marcusk19/mywebsite/posts/springwordle/</link>
       <pubDate>Thu, 10 Mar 2022 21:57:09 +0000</pubDate>
       
-      <guid>http://example.org/posts/springwordle/</guid>
+      <guid>https://gitlab.com/Marcusk19/mywebsite/posts/springwordle/</guid>
       <description>I’ve wanted to build a web-app using Java and the recently popular game “Wordle” looked easy to replicate in my own way. The original Wordle game itself was only a Javascript file for most of the logic. However, I took this as a chance to learn some basics of Spring Boot and build a proper web-application based on the game.
 File structure of my project
 The Wordle Class Getting started was simple enough thanks to the Spring Initializr extension installed on my VScode.</description>
@@ -41,29 +59,29 @@ The Wordle Class Getting started was simple enough thanks to the Spring Initiali
     
     <item>
       <title>Log4shell</title>
-      <link>http://example.org/posts/log4shell/</link>
+      <link>https://gitlab.com/Marcusk19/mywebsite/posts/log4shell/</link>
       <pubDate>Thu, 30 Dec 2021 08:47:11 +0100</pubDate>
       
-      <guid>http://example.org/posts/log4shell/</guid>
+      <guid>https://gitlab.com/Marcusk19/mywebsite/posts/log4shell/</guid>
       <description>A couple weeks ago a zero-day vulnerability was exposed on servers running the game Minecraft. However, this vulnerability was not restricted to just Minecraft servers – it also affected more than thousands of other devices.
 Log4j Log4j is a java utility commonly used to allow applications to keep track of past actions. Log4shell refers to the vulnerability that was discovered in log4j. It was published as CVE-2021-44228, which can be found here.</description>
     </item>
     
     <item>
       <title>Place Picker</title>
-      <link>http://example.org/posts/placepicker/</link>
+      <link>https://gitlab.com/Marcusk19/mywebsite/posts/placepicker/</link>
       <pubDate>Sun, 26 Dec 2021 08:47:11 +0100</pubDate>
       
-      <guid>http://example.org/posts/placepicker/</guid>
+      <guid>https://gitlab.com/Marcusk19/mywebsite/posts/placepicker/</guid>
       <description>Something I always thought was cool about programming was the high-level functionality you could build into programs using other developers’ APIs. Coming from an ECE background however, I didn’t have much chance to mess around with that kind of stuff. This project was a way of getting my feet wet in working in API calls with my programs and starting to work in Python – which ended up to be much more fun than I thought.</description>
     </item>
     
     <item>
       <title>How I Blocked Ads on My Home Network</title>
-      <link>http://example.org/posts/pihole/</link>
+      <link>https://gitlab.com/Marcusk19/mywebsite/posts/pihole/</link>
       <pubDate>Tue, 14 Dec 2021 08:47:11 +0100</pubDate>
       
-      <guid>http://example.org/posts/pihole/</guid>
+      <guid>https://gitlab.com/Marcusk19/mywebsite/posts/pihole/</guid>
       <description>I’m not a fan of seeing ads everywhere, and even find some of them intrusive. When I discovered Pi-hole, a dns level ad-blocker that supposedly could block ads for all devices on my home network, I was instantly intrigued. I immediately bought an affordable Raspberry Pi Zero W with the end goal of having my own pi-hole on my network.
 Setting up the Pi To begin, I first had to flash an iso image for my desired operating system to my Pi.</description>
     </item>

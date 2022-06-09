@@ -2,32 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://example.org/about/</loc>
+    <loc>https://gitlab.com/Marcusk19/mywebsite/resume/</loc>
+    <lastmod>2022-06-09T12:27:53-04:00</lastmod>
+  </url><url>
+    <loc>https://gitlab.com/Marcusk19/mywebsite/about/</loc>
     <lastmod>2022-06-08T18:14:22-04:00</lastmod>
   </url><url>
-    <loc>http://example.org/</loc>
+    <loc>https://gitlab.com/Marcusk19/mywebsite/</loc>
     <lastmod>2022-06-08T21:57:09+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/posts/</loc>
+    <loc>https://gitlab.com/Marcusk19/mywebsite/posts/</loc>
     <lastmod>2022-06-08T21:57:09+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/posts/singlegpu/</loc>
+    <loc>https://gitlab.com/Marcusk19/mywebsite/posts/singlegpu/</loc>
     <lastmod>2022-06-08T21:57:09+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/posts/springwordle/</loc>
+    <loc>https://gitlab.com/Marcusk19/mywebsite/posts/springwordle/</loc>
     <lastmod>2022-03-10T21:57:09+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/posts/log4shell/</loc>
+    <loc>https://gitlab.com/Marcusk19/mywebsite/posts/log4shell/</loc>
     <lastmod>2021-12-30T08:47:11+01:00</lastmod>
   </url><url>
-    <loc>http://example.org/posts/placepicker/</loc>
+    <loc>https://gitlab.com/Marcusk19/mywebsite/posts/placepicker/</loc>
     <lastmod>2021-12-26T08:47:11+01:00</lastmod>
   </url><url>
-    <loc>http://example.org/posts/pihole/</loc>
+    <loc>https://gitlab.com/Marcusk19/mywebsite/posts/pihole/</loc>
     <lastmod>2021-12-14T08:47:11+01:00</lastmod>
   </url><url>
-    <loc>http://example.org/categories/</loc>
+    <loc>https://gitlab.com/Marcusk19/mywebsite/categories/</loc>
   </url><url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://gitlab.com/Marcusk19/mywebsite/tags/</loc>
   </url>
 </urlset>
