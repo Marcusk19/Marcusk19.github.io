@@ -10,4 +10,3 @@ I also work at VMware as a co-op intern on the support team for their Tanzu plat
 
 This website serves as a place where I can document some of the projects I have worked on.
 
-![profile](./headshot.jpeg)
