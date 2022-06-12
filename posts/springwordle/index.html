@@ -1,0 +1,287 @@
+<!doctype html><html lang=en-us><head><title>Spring Boot Wordle // Marcus Kok</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.100.2"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="MarcusK"><meta name=description content><link rel=stylesheet href=https://marcusk19.github.io/mywebsite/css/main.min.4a7ec8660f9a44b08c4da97c5f2e31b1192df1d4d0322e65c0dbbc6ecb1b863f.css><meta name=twitter:card content="summary"><meta name=twitter:title content="Spring Boot Wordle"><meta name=twitter:description content="I’ve wanted to build a web-app using Java and the recently popular game “Wordle” looked easy to replicate in my own way. The original Wordle game itself was only a Javascript file for most of the logic. However, I took this as a chance to learn some basics of Spring Boot and build a proper web-application based on the game.
+File structure of my project
+The Wordle Class Getting started was simple enough thanks to the Spring Initializr extension installed on my VScode."><meta property="og:title" content="Spring Boot Wordle"><meta property="og:description" content="I’ve wanted to build a web-app using Java and the recently popular game “Wordle” looked easy to replicate in my own way. The original Wordle game itself was only a Javascript file for most of the logic. However, I took this as a chance to learn some basics of Spring Boot and build a proper web-application based on the game.
+File structure of my project
+The Wordle Class Getting started was simple enough thanks to the Spring Initializr extension installed on my VScode."><meta property="og:type" content="article"><meta property="og:url" content="https://marcusk19.github.io/mywebsite/posts/springwordle/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-03-10T21:57:09+00:00"><meta property="article:modified_time" content="2022-03-10T21:57:09+00:00"></head><body><header class=app-header><a href=https://marcusk19.github.io/mywebsite/><img class=app-header-avatar src=/mywebsite/avatar.jpg alt=MarcusK></a><h1>Marcus Kok</h1><nav class=app-header-menu><a class=app-header-menu-item href=/mywebsite/about/>About</a>
+|
+<a class=app-header-menu-item href=/mywebsite/resume/>CV</a>
+|
+<a class=app-header-menu-item href=/mywebsite/>Posts</a></nav><p>I like to code and break things in Linux</p><div class=app-header-social><a href=https://github.com/Marcusk19 target=_blank rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github"><title>My Github</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a><a href=https://www.linkedin.com/in/marcus-kok-9a80551a3/ target=_blank rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin"><title>LinkedIn</title><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a></div></header><main class=app-container><article class=post><header class=post-header><h1 class=post-title>Spring Boot Wordle</h1><div class=post-meta><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Mar 10, 2022</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>10 min read</div></div></header><div class=post-content><p>I’ve wanted to build a web-app using Java and the recently popular game “Wordle” looked easy to replicate in my own way. The original Wordle game itself was only a Javascript file for most of the logic. However, I took this as a chance to learn some basics of Spring Boot and build a proper web-application based on the game.</p><p><img src=https://marcuskok.tech/wp-content/uploads/2022/02/Screen-Shot-2022-02-27-at-4.14.16-PM.png alt></p><p>File structure of my project</p><h5 id=the-wordle-class>The Wordle Class</h5><p>Getting started was simple enough thanks to the <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-spring-initializr" title="Spring Initializr">Spring Initializr</a> extension installed on my VScode. Spring also provides <a href=https://start.spring.io/ title="their own initializer">their own initializer</a> as an alternative. I chose Gradle over Maven mainly because I had used Maven previously from messing around with Spring and wanted to try Gradle out for a change. I’m still not clear on the pros and cons for one or the other so I’ll probably come back and edit this more when I have a better understanding.</p><p>The first step to working out how I was going to implement this project was to think about how the logic behind the game would work. I decided a good approach was to create a Wordle class as so:</p><pre tabindex=0><code>public class Wordle {
+
+    List &lt;String&gt; words = new ArrayList&lt;String&gt;(); // a list of words to pick from randomly
+    private String solution = &#34;marky&#34;; // variable to hold the solution
+    private int numGuesses = 0; // counter for the number of guesses the player has
+    private boolean correctGuess = false; // flag for when player makes the correct guess
+
+}
+</code></pre><p>There are two different ways to fill up the words list that I implemented. Initially I had a simple .txt file with all the five letter words – totaling roughly 1,000 lines. It was fine to read from that file when I was testing my code locally. However, when I tried packaging it up using Gradle I ran into issues because the packaged code couldn’t find my .txt file.</p><p>As a workaround I decided to pull directly from where I got the list of words from: GitHub. I found some example code of how to connect and read raw data from GitHub which seemed to do the trick.</p><pre tabindex=0><code>try { 
+            url = new URL(&#34;https://raw.githubusercontent.com/charlesreid1/five-letter-words/master/sgb-words.txt&#34;);
+            URLConnection uc = url.openConnection();
+            uc.setRequestProperty(&#34;X-Requested-With&#34;, &#34;Curl&#34;);
+            String userpass = username + &#34;:&#34; + password;
+            String basicAuth = &#34;Basic&#34; + new String(Base64.getEncoder().encode(userpass.getBytes()));
+            uc.setRequestProperty(&#34;Authorization&#34;, basicAuth);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(uc.getInputStream()));
+            String line = null;
+            while ((line = reader.readLine()) != null) 
+                words.add(line);
+            
+            reader.close();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+</code></pre><p>Then I had an idea to set up a MySQL server in the cloud and store my data there. It derailed me for a bit while I tried to figure out how to get stuff to work, but I ended up learning some useful stuff for future projects. Instead of getting data from GitHub this code reaches out to a database I already pre-populated with all the words. To make sure I wasn’t leaking any sensitive credentials, I made use of a properties file to define my JDBC url along with username and password.</p><pre tabindex=0><code>        try {
+            Properties prop = new Properties();
+            InputStream input = getClass().getClassLoader().getResourceAsStream(&#34;config.properties&#34;);
+
+            if(input != null) {
+                prop.load(input);
+            } else {
+                System.out.println(&#34;Properties file not found&#34;);
+            }
+
+            url = prop.getProperty(&#34;url&#34;);
+            username = prop.getProperty(&#34;username&#34;);
+            password = prop.getProperty(&#34;password&#34;);
+        } catch(IOException ioe) {
+            ioe.printStackTrace();
+        }
+
+
+        
+        // connection to mysql database
+        try {
+            Class.forName(&#34;com.mysql.cj.jdbc.Driver&#34;);
+            Connection con = DriverManager.getConnection(url, username, password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(&#34;select * from five_letters&#34;);
+            // add all results from result set to words array
+            while(rs.next()) words.add(rs.getString(1)); 
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+</code></pre><p>Moving forward I went with the GitHub approach; simply because it ended up being easier in the long run and I didn’t want to spend money on a dedicated node in the cloud for a MySQL database.</p><p>Now it was time to define the methods for the game. To start with here’s the implementation for choosing a solution from the list of words at random. Basically it uses a random int as the index from the list to choose from.</p><pre tabindex=0><code>public String chooseSolution() {
+        // select a random word from words to use as the solution
+        if(words.size() &lt;= 0)  return &#34;No list&#34;; // don&#39;t do anything if we can&#39;t fetch from the db
+        Random rnd = new Random();
+        int index = rnd.nextInt(words.size());
+        this.solution = words.get(index);
+        numGuesses = 0;
+        return &#34;Solution chosen&#34;;
+    }
+</code></pre><p>The biggest part is validating a user provided guess against the solution. Several considerations have to be made. For instance, whether the user entered a valid word or not. Additionally, once a letter has been determined to be in the correct spot, it should no longer be considered for checking or it could lead to false positives if the guess contains multiple of that letter. We also keep track of the number of guesses the user has entered along with whether the correct guess has been flagged or not. For each letter in the guess there are three possibilities:</p><ul><li><p>“correct” – letter is in the correct space.</p></li><li><p>“present” – letter is <strong>not</strong> in the correct space but is present somewhere else in the solution.</p></li><li><p>“absent” – letter is not present anywhere in the solution.</p><p>The function returns an array of strings. Each one represents the state of its respective letter in the guess.<br>For example, a guess of “plane” for the solution “crane” would return [“absent”, “absent”, “correct”, “correct”, “correct”]</p></li></ul><pre tabindex=0><code>public String[] validateGuess(String guess) {
+        guess = guess.toLowerCase();
+        numGuesses++;
+        String validation[] = new String[solution.length()];
+        String tempSol = solution;
+        int correct = 0;
+
+        // check for valid input
+        if(!(words.contains(guess)) || guess.length() &lt; solution.length()) {
+            validation[0] = &#34;invalid&#34;;
+            if(numGuesses &gt; 0) numGuesses--;
+            return validation;
+        }
+
+        // check for correctness
+        for(int i = 0; i &lt; guess.length(); i++) {
+            char letter = guess.charAt(i);
+            if(letter == tempSol.charAt(i)) {
+                // add correct
+                correct += 1;
+                validation[i] = &#34;correct&#34;;
+                // remove correct char from tempSol so is not doubly checked
+                tempSol = tempSol.substring(0, i) + &#34;-&#34; + tempSol.substring(i+1, tempSol.length());
+
+            }
+            else if(tempSol.contains(Character.toString(letter))) {
+                // add present 
+                validation[i] = &#34;present&#34;;
+            } else {
+                // add absent
+                validation[i] = &#34;absent&#34;;
+            }
+        }
+        if(correct == solution.length()) {
+            correctGuess = true;
+        }
+        return validation;    
+    }
+</code></pre><p>After the validation method all that remains to do is build some helper functions to access important instance variables of the class.</p><pre tabindex=0><code>    public List&lt;String&gt; getWords() {
+        // handler function to return words array
+        return words;
+    }
+
+    public String getSolution(){
+        // handler funciton to return solution
+        return this.solution.toUpperCase();
+    }
+
+    public String checkGameOver() {
+        if(correctGuess || numGuesses &gt;= 6) return &#34;true&#34;;
+        else return &#34;false&#34;;
+    }
+</code></pre><h5 id=controllers-and-applications>Controllers and Applications</h5><p>This may not be the most optimized way to do things, but I decided to build two Spring Boot controllers. One that handles API calls for the Java backend and another to serve the index.html file for the frontend.</p><p>Additionally, I added some endpoints to check the current solution and status of the game that were helpful while debugging.</p><pre tabindex=0><code>@RestController
+@RequestMapping(value = &#34;/api&#34;)
+public class WordleController {
+    Wordle wordle = new Wordle();
+
+    @GetMapping(&#34;/solution&#34;)
+    public String solution() {
+        return wordle.getSolution();
+    }
+
+    @GetMapping(&#34;/validate&#34;)
+    public String[] validate(@RequestParam(value=&#34;guess&#34;, defaultValue=&#34;     &#34;)String guess) {
+        return wordle.validateGuess(guess);
+    }
+
+    @GetMapping(&#34;/check_game&#34;)
+    public String checkGame() {
+        return wordle.checkGameOver();
+    }
+
+    @GetMapping(&#34;/choose_solution&#34;)
+    public String choose_solution() {
+        return wordle.chooseSolution();
+    }
+}
+</code></pre><pre tabindex=0><code>@Controller
+public class SpringWordleApplicationController {
+
+    @RequestMapping(&#34;/&#34;)
+    public String index() {
+        return &#34;index&#34;;
+    }
+
+}
+</code></pre><p>Nothing too special in the application file, just a main function to start it.</p><pre tabindex=0><code>@SpringBootApplication
+@EnableAutoConfiguration
+@ComponentScan
+public class SpringWordleApplication {
+
+public static void main(String[] args) {
+SpringApplication.run(SpringWordleApplication.class, args);
+}
+
+}@SpringBootApplication
+@EnableAutoConfiguration
+@ComponentScan
+public class SpringWordleApplication {
+
+public static void main(String[] args) {
+SpringApplication.run(SpringWordleApplication.class, args);
+}
+
+}
+</code></pre><h5 id=the-frontend>The Frontend</h5><p>From looking at other approaches to coding Wordle it seemed like a lot of people chose to automate the process of building the grid with Javascript.</p><pre tabindex=0><code>// create the board
+    for(let r = 0; r &lt; height; r++) {
+        for(let c = 0; c &lt; width; c++) {
+            let tile = document.createElement(&#34;span&#34;);
+            tile.id = r.toString() + &#34;-&#34; + c.toString();
+            tile.classList.add(&#34;box&#34;)
+            tile.innerText = &#34;&#34;;
+
+            document.getElementById(&#34;board&#34;).appendChild(tile);
+        }
+    }
+</code></pre><p>Then event listeners are added for user entered key-presses. It’s important to add a listener event for the backspace key so players can edit their guesses.</p><pre tabindex=0><code>document.addEventListener(&#34;keyup&#34;, (e) =&gt; {
+        if(gameOver) return;
+        // alert(e.code)
+        if(&#34;KeyA&#34; &lt;= e.code  &amp;&amp; e.code &lt;= &#34;KeyZ&#34;){
+            if(col &lt; width){
+                let currTile = document.getElementById(row.toString() + &#39;-&#39; + col.toString());
+                if(currTile.innerText == &#34;&#34;) {
+                    currTile.innerText = e.code[3];
+                    col += 1;
+                }
+            }
+        }
+        else if(e.code == &#34;Backspace&#34;) {
+            if(0 &lt; col &amp;&amp; col &lt;= width) {
+                col -= 1;
+                let currTile = document.getElementById(row.toString() + &#39;-&#39; + col.toString());
+                currTile.innerText = &#34;&#34;;
+            }
+        }
+        else if(e.code == &#34;Enter&#34;) {
+            check();
+            if(row &lt; height) row += 1;
+            col = 0;
+        }
+
+    })
+</code></pre><p>Every time the user presses the Enter key the check() function is called. The logic behind this function turned out to be more heavy than I thought it would, but it does the job. A few things are done within the check() function. First, it reaches out to the backend and checks the status of the game. It then reaches out again and validates the user’s guess, then updates the colors of the each box according to the validation array returned. Lastly, it updates the current row the user is on so they can make their next guess.</p><pre tabindex=0><code>function check(){
+    // check if game is over
+    fetch(apiUrl + &#39;/check_game&#39;)
+    .then(response =&gt; {
+        return response.text();
+    })
+    .then((data) =&gt; {
+        let endGame = data;
+        console.log(endGame);
+        
+        if(endGame == &#34;true&#34;) {
+            // only get solution if the game is over
+            fetch(apiUrl + &#39;/solution&#39;)
+            .then(response =&gt; {
+                return response.text();
+            })
+            .then((text) =&gt; {
+                let solution = text;
+                document.getElementById(&#34;answer&#34;).innerText = solution;
+            })
+
+            gameOver = true;
+            return;
+        }
+    })
+
+    var guess = &#34;&#34;
+    for(let c = 0; c &lt; width; c++) {
+        let currTile = document.getElementById(row.toString() + &#39;-&#39; + c.toString());
+        let letter = currTile.innerText;
+        guess = guess + letter;
+    }
+    console.log(guess);
+
+    fetch(apiUrl + &#39;/validate?guess=&#39; + guess)
+    .then(response =&gt; {
+        return response.json();
+    })
+    .then((data) =&gt; {
+        let validate_arr = data;
+
+        for(let i = 0; i &lt; width; i++) {
+            console.log(validate_arr[i]);
+            let currTile = document.getElementById((row-1).toString() + &#39;-&#39; + i.toString());
+            console.log(row.toString() + &#39;-&#39; + i.toString());
+            if(validate_arr[0] == &#34;invalid&#34;) {
+                currTile.innerText = &#34;&#34;;
+            } else {
+                currTile.classList.add(validate_arr[i]);
+            }
+        }
+        if(validate_arr[0] == &#34;invalid&#34;) row -= 1;
+    })
+}
+</code></pre><p>The index.html file is pretty simple compared to the Javascript. It defines the header for the UI along with a div to contain the game board.</p><pre tabindex=0><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel=&#34;stylesheet&#34; href=&#34;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css&#34; integrity=&#34;sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm&#34; crossorigin=&#34;anonymous&#34;&gt;
+        &lt;link href=&#34;css/index.css&#34; rel=&#34;stylesheet&#34; /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1 id=&#34;title&#34;&gt;Poor Man&#39;s Wordle&lt;/h1&gt;
+        &lt;br&gt;
+        &lt;div id=&#34;board&#34;&gt;
+            &lt;script src=&#34;js/wordle.js&#34;&gt;&lt;/script&gt;
+        &lt;/div&gt;
+        &lt;br&gt;
+        &lt;h1 id=&#34;answer&#34;&gt;&lt;/h1&gt;
+        
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>All that’s left after putting everything together is to make the executable with <code>gradle clean build</code><br>and then run it with <code>java -jar build/libs/spring_wordle-1.1.jar</code></p><p><img src=https://marcuskok.tech/wp-content/uploads/2022/02/Screen-Shot-2022-02-27-at-3.59.26-PM.png alt></p><p>The final result</p><h5 id=conclusion>Conclusion</h5><p>I learned several things through doing this project. Firstly, when I started making it I got caught up with putting a lot of the logic on the frontend Javascript file. When I brought this up with my friends who had more knowledge about this sort of stuff, they suggested that I instead try building a REST API and have the frontend make calls to it. This led me to the approach shown here. I also learned that each call should be independent of each other. In other words, there shouldn’t be a required order that these calls have to happen in – which led me to rethink how I wanted the Wordle.java logic to behave. Beyond just learning about building an API, I also discovered how to programmatically make HTTP requests in both Java and Javascript. The end result may be far from perfect as the official Wordle (As of writing this I still need to add a keyboard to let players keep track of the letters they use). However, this was a fun project to work on between doing the daily wordles.</p><p>If you would like to check out the full code for the project, it’s all on my GitHub <a href=https://github.com/Marcusk19/Spring_Wordle title=here>here</a>.</p></div><div class=post-footer></div></article></main></body></html>
