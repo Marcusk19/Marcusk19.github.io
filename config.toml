@@ -22,7 +22,7 @@ theme = "my_m10c"
 
 [params]
     author = 'MarcusK'
-    description = 'I like to code and break things in Linux'
+    description = 'I like to code and break things'
     menu_item_separator = '|'
     [[params.social]]
         icon = "github"
