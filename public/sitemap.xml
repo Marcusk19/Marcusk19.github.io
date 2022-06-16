@@ -2,17 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://marcusk19.github.io/</loc>
+    <lastmod>2022-06-14T09:28:51-04:00</lastmod>
+  </url><url>
+    <loc>https://marcusk19.github.io/posts/newsite/</loc>
+    <lastmod>2022-06-14T09:28:51-04:00</lastmod>
+  </url><url>
+    <loc>https://marcusk19.github.io/posts/</loc>
+    <lastmod>2022-06-14T09:28:51-04:00</lastmod>
+  </url><url>
     <loc>https://marcusk19.github.io/resume/</loc>
     <lastmod>2022-06-09T12:27:53-04:00</lastmod>
   </url><url>
     <loc>https://marcusk19.github.io/about/</loc>
     <lastmod>2022-06-08T18:14:22-04:00</lastmod>
-  </url><url>
-    <loc>https://marcusk19.github.io/</loc>
-    <lastmod>2022-06-08T21:57:09+00:00</lastmod>
-  </url><url>
-    <loc>https://marcusk19.github.io/posts/</loc>
-    <lastmod>2022-06-08T21:57:09+00:00</lastmod>
   </url><url>
     <loc>https://marcusk19.github.io/posts/singlegpu/</loc>
     <lastmod>2022-06-08T21:57:09+00:00</lastmod>
