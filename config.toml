@@ -2,6 +2,7 @@ baseURL = 'https://marcuskok.com/'
 languageCode = 'en-us'
 title = 'Marcus Kok'
 theme = "my_m10c"
+enableEmoji = 'true'
 
 [menu]
     [[menu.main]]
@@ -32,3 +33,4 @@ theme = "my_m10c"
         icon = "linkedin"
         name = "LinkedIn"
         url = "https://www.linkedin.com/in/marcus-kok-9a80551a3/"
+

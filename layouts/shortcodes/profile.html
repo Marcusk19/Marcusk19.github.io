@@ -1,0 +1,5 @@
+{{ $image := resources.Get "images/grass.png" }}
+{{ $image := $image.Fit "600x400" }}
+{{ with $image }}
+  <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}">
+{{ end }}

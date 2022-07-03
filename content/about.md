@@ -8,5 +8,6 @@ I’m currently studying Electrical and Computer Engineering at North Carolina S
 
 I also work at VMware as a co-op intern on the support team for their Tanzu platform.
 
-This website serves as a place where I can document some of the projects I have worked on.
+This website serves as a place where I can document some of the projects I have worked on :smile:
 
+{{<profile>}}
