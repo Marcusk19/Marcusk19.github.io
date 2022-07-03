@@ -4,8 +4,6 @@
 
 ---
 
-(336)692-0890 | marcusk1699@gmail.com | 4218 Mill Village Rd, Raleigh, NC, 27612 | marcuskok.com | github.com/Marcusk19 
-
 ### Experience
 
 ---

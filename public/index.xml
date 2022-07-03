@@ -86,12 +86,13 @@ Setting up the Pi To begin, I first had to flash an iso image for my desired ope
       
       <guid>https://marcuskok.com/resume/</guid>
       <description>\pagenumbering{gobble}
-Marcus Kok (336)692-0890 | marcusk1699@gmail.com | 4218 Mill Village Rd, Raleigh, NC, 27612 | marcuskok.com | github.com/Marcusk19
-Experience Vmware | Raleigh, NC
+Marcus Kok Experience Vmware | Raleigh, NC
 Product Support Engineer (Intern) | 05/2021 - 08/2021, 01/2022 - present
 Handled cases for VMware Tanzu with severities of 14.29% critical, 39.29% high, 46.43% low and a CES score of 4.5/5
 Developed internal tool to stress resources while testing using Go .
-Achieved resolution of issues regarding platform, apps, and services.</description>
+Achieved resolution of issues regarding platform, apps, and services.
+Projects Wordle App
+Wordle game web app built with Spring Boot that can be pushed to Cloud Foundry.</description>
     </item>
     
   </channel>
