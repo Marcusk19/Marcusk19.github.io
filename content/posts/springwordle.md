@@ -15,7 +15,7 @@ Getting started was simple enough thanks to the [Spring Initializr](https://mark
 
 The first step to working out how I was going to implement this project was to think about how the logic behind the game would work. I decided a good approach was to create a Wordle class as so:
 
-```
+```java
 public class Wordle {
 
     List <String> words = new ArrayList<String>(); // a list of words to pick from randomly
@@ -30,7 +30,7 @@ There are two different ways to fill up the words list that I implemented. Initi
 
 As a workaround I decided to pull directly from where I got the list of words from: GitHub. I found some example code of how to connect and read raw data from GitHub which seemed to do the trick.
 
-```
+```java
 try { 
             url = new URL("https://raw.githubusercontent.com/charlesreid1/five-letter-words/master/sgb-words.txt");
             URLConnection uc = url.openConnection();
@@ -52,7 +52,7 @@ try {
 
 Then I had an idea to set up a MySQL server in the cloud and store my data there. It derailed me for a bit while I tried to figure out how to get stuff to work, but I ended up learning some useful stuff for future projects. Instead of getting data from GitHub this code reaches out to a database I already pre-populated with all the words. To make sure I wasn’t leaking any sensitive credentials, I made use of a properties file to define my JDBC url along with username and password.
 
-```
+```java
         try {
             Properties prop = new Properties();
             InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
@@ -90,7 +90,7 @@ Moving forward I went with the GitHub approach; simply because it ended up being
 
 Now it was time to define the methods for the game. To start with here’s the implementation for choosing a solution from the list of words at random. Basically it uses a random int as the index from the list to choose from.
 
-```
+```java
 public String chooseSolution() {
         // select a random word from words to use as the solution
         if(words.size() <= 0)  return "No list"; // don't do anything if we can't fetch from the db
@@ -112,7 +112,7 @@ The biggest part is validating a user provided guess against the solution. Sever
     For example, a guess of “plane” for the solution “crane” would return \[“absent”, “absent”, “correct”, “correct”, “correct”\]
     
 
-```
+```java
 public String[] validateGuess(String guess) {
         guess = guess.toLowerCase();
         numGuesses++;
@@ -155,7 +155,7 @@ public String[] validateGuess(String guess) {
 
 After the validation method all that remains to do is build some helper functions to access important instance variables of the class.
 
-```
+```java
     public List<String> getWords() {
         // handler function to return words array
         return words;
@@ -178,7 +178,7 @@ This may not be the most optimized way to do things, but I decided to build two 
 
 Additionally, I added some endpoints to check the current solution and status of the game that were helpful while debugging.
 
-```
+```java
 @RestController
 @RequestMapping(value = "/api")
 public class WordleController {
@@ -206,7 +206,7 @@ public class WordleController {
 }
 ```
 
-```
+```java
 @Controller
 public class SpringWordleApplicationController {
 
@@ -220,7 +220,7 @@ public class SpringWordleApplicationController {
 
 Nothing too special in the application file, just a main function to start it.
 
-```
+```java
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan
@@ -246,7 +246,7 @@ SpringApplication.run(SpringWordleApplication.class, args);
 
 From looking at other approaches to coding Wordle it seemed like a lot of people chose to automate the process of building the grid with Javascript.
 
-```
+```js
 // create the board
     for(let r = 0; r < height; r++) {
         for(let c = 0; c < width; c++) {
@@ -262,7 +262,7 @@ From looking at other approaches to coding Wordle it seemed like a lot of people
 
 Then event listeners are added for user entered key-presses. It’s important to add a listener event for the backspace key so players can edit their guesses.
 
-```
+```js
 document.addEventListener("keyup", (e) => {
         if(gameOver) return;
         // alert(e.code)
@@ -293,7 +293,7 @@ document.addEventListener("keyup", (e) => {
 
 Every time the user presses the Enter key the check() function is called. The logic behind this function turned out to be more heavy than I thought it would, but it does the job. A few things are done within the check() function. First, it reaches out to the backend and checks the status of the game. It then reaches out again and validates the user’s guess, then updates the colors of the each box according to the validation array returned. Lastly, it updates the current row the user is on so they can make their next guess.
 
-```
+```java
 function check(){
     // check if game is over
     fetch(apiUrl + '/check_game')
@@ -352,7 +352,7 @@ function check(){
 
 The index.html file is pretty simple compared to the Javascript. It defines the header for the UI along with a div to contain the game board.
 
-```
+```html
 <!DOCTYPE html>
 <html>
     <head>

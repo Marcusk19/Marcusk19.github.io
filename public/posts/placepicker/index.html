@@ -89,99 +89,99 @@
 <p>To solve the problem of automatically grabbing locations for me I decided to use IpInfo’s API to get a location for me so I could then pass that location to Google’s API. More information on IpInfo can be found <a href="https://ipinfo.io/">here</a>. In order to simplify things (and force myself to work across multiple files) I broke up the logic into two .py files – ipHandler.py and placePicker.py.</p>
 <p>The ipHandler.py file had only one job, and that was to return a city and location from the current IP address.</p>
 <p>Documentation from IpInfo was really straightforward and I was able to accomplish this with only five lines (with a commented sixth line for my own debugging purposes)</p>
-<pre tabindex="0"><code>access_token = picker.config.access_token
-handler = ipinfo.getHandler(access_token)
-ip_address = get(&#39;https://api.ipify.org&#39;).content.decode(&#39;utf8&#39;)
-# print(&#39;ip: {0}&#39;.format(ip_address)) // Printing out the ip to make sure I&#39;m doing this right
-details = handler.getDetails(ip_address)
-</code></pre><p>Then all I had to do was build two simple functions to return the location from the details object:</p>
-<pre tabindex="0"><code>def get_location():
-    return details.loc
-
-def get_city():
-    return details.city
-</code></pre><p>Moving onto placePicker.py, this is where I pass in a city for my request to the Google Places API from ipHandler.py by calling the get_city() function I just wrote. Then it’s a simple matter of parsing the JSON response and putting all the restaurants into an array. After that I choose a place using a randomly generated index of the array and print it to the console. I only care about the name, address, and location, so those are the values I print from the places object obtained from the JSON. Information like latitude and longitude can stay hidden from the end user.</p>
-<pre tabindex="0"><code>def pickPlace():
-    # declare an array of places to choose from
-    all_places = []
-    keywords = [&#39;restaurant&#39;]
-    api_key = config.api_key
-    radius = &#39;1000&#39;
-    coordinates = ipHandler.get_location() # obtain coords from ip addr
-    city = ipHandler.get_city()
-    print(&#39;Searching {0} within radius {1}...&#39;.format(city, radius))
-    # print(coordinates)
-
-    for keyword in keywords:
-        url = &#39;https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=&#39;+coordinates+&#39;&amp;radius=&#39;+str(radius)+&#39;&amp;keyword=&#39;+str(keyword)+&#39;&amp;key=&#39;+str(api_key)
-        while(True):
-        # print(url)
-            respon = requests.get(url)
-            jj = json.loads(respon.text)
-            results = jj[&#39;results&#39;]
-            for result in results:
-                name = result[&#39;name&#39;]
-                place_id = result[&#39;place_id&#39;]
-                lat = result[&#39;geometry&#39;][&#39;location&#39;][&#39;lat&#39;]
-                lng = result[&#39;geometry&#39;][&#39;location&#39;][&#39;lng&#39;]
-                rating = result[&#39;rating&#39;]
-                types = result[&#39;types&#39;]
-                vicinity = result[&#39;vicinity&#39;]
-                place = [name, place_id, lat, lng, rating, types, vicinity]
-                all_places.append(place)
-
-            if &#39;next_page_token&#39; not in jj:
-                break
-            else:
-                next_page_token = jj[&#39;next_page_token&#39;]
-                url = &#39;https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=&#39;+str(api_key)+&#39;&amp;pagetoken=&#39;+str(next_page_token)
-                continue
-        labels = [&#39;Place Name&#39;, &#39;Place ID&#39;, &#39;Latitude&#39;, &#39;Longitude&#39;, &#39;Rating&#39;, &#39;Types&#39;, &#39;Vicinity&#39;]
-            #    [    0            1            2           3           4          5         6    ]
-        
-        # code that exports data to csv file if needed
-        # export_dataframe_1_medium = pd.DataFrame.from_records(all_places, columns=labels)
-        # export_dataframe_1_medium.to_csv(&#39;export_dataframe_1_medium.csv&#39;)
-        
-    x = 0
-    y = len(all_places) - 1
-    random_index = random.randint(x,y)
-
-    name = all_places[random_index][0]
-    rating = all_places[random_index][4]
-    address = all_places[random_index][6]
-    time.sleep(3)
-    # print(&#39;I suggest &#34;{0}&#34; with a rating of {1} at &#34;{2}&#34;&#39;.format(name, rating, address))
-    return &#34;I suggest &#34; + str(name) + &#34; with a rating of &#34; + str(rating) + &#34; at &#34; + str(address)
-</code></pre><h2 id="the-ui">The UI</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>access_token <span style="color:#f92672">=</span> picker<span style="color:#f92672">.</span>config<span style="color:#f92672">.</span>access_token
+</span></span><span style="display:flex;"><span>handler <span style="color:#f92672">=</span> ipinfo<span style="color:#f92672">.</span>getHandler(access_token)
+</span></span><span style="display:flex;"><span>ip_address <span style="color:#f92672">=</span> get(<span style="color:#e6db74">&#39;https://api.ipify.org&#39;</span>)<span style="color:#f92672">.</span>content<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf8&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># print(&#39;ip: {0}&#39;.format(ip_address)) // Printing out the ip to make sure I&#39;m doing this right</span>
+</span></span><span style="display:flex;"><span>details <span style="color:#f92672">=</span> handler<span style="color:#f92672">.</span>getDetails(ip_address)
+</span></span></code></pre></div><p>Then all I had to do was build two simple functions to return the location from the details object:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_location</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> details<span style="color:#f92672">.</span>loc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_city</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> details<span style="color:#f92672">.</span>city
+</span></span></code></pre></div><p>Moving onto placePicker.py, this is where I pass in a city for my request to the Google Places API from ipHandler.py by calling the get_city() function I just wrote. Then it’s a simple matter of parsing the JSON response and putting all the restaurants into an array. After that I choose a place using a randomly generated index of the array and print it to the console. I only care about the name, address, and location, so those are the values I print from the places object obtained from the JSON. Information like latitude and longitude can stay hidden from the end user.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pickPlace</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># declare an array of places to choose from</span>
+</span></span><span style="display:flex;"><span>    all_places <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    keywords <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;restaurant&#39;</span>]
+</span></span><span style="display:flex;"><span>    api_key <span style="color:#f92672">=</span> config<span style="color:#f92672">.</span>api_key
+</span></span><span style="display:flex;"><span>    radius <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;1000&#39;</span>
+</span></span><span style="display:flex;"><span>    coordinates <span style="color:#f92672">=</span> ipHandler<span style="color:#f92672">.</span>get_location() <span style="color:#75715e"># obtain coords from ip addr</span>
+</span></span><span style="display:flex;"><span>    city <span style="color:#f92672">=</span> ipHandler<span style="color:#f92672">.</span>get_city()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;Searching </span><span style="color:#e6db74">{0}</span><span style="color:#e6db74"> within radius </span><span style="color:#e6db74">{1}</span><span style="color:#e6db74">...&#39;</span><span style="color:#f92672">.</span>format(city, radius))
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># print(coordinates)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> keyword <span style="color:#f92672">in</span> keywords:
+</span></span><span style="display:flex;"><span>        url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=&#39;</span><span style="color:#f92672">+</span>coordinates<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;radius=&#39;</span><span style="color:#f92672">+</span>str(radius)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;keyword=&#39;</span><span style="color:#f92672">+</span>str(keyword)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;key=&#39;</span><span style="color:#f92672">+</span>str(api_key)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#66d9ef">True</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># print(url)</span>
+</span></span><span style="display:flex;"><span>            respon <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url)
+</span></span><span style="display:flex;"><span>            jj <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(respon<span style="color:#f92672">.</span>text)
+</span></span><span style="display:flex;"><span>            results <span style="color:#f92672">=</span> jj[<span style="color:#e6db74">&#39;results&#39;</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> result <span style="color:#f92672">in</span> results:
+</span></span><span style="display:flex;"><span>                name <span style="color:#f92672">=</span> result[<span style="color:#e6db74">&#39;name&#39;</span>]
+</span></span><span style="display:flex;"><span>                place_id <span style="color:#f92672">=</span> result[<span style="color:#e6db74">&#39;place_id&#39;</span>]
+</span></span><span style="display:flex;"><span>                lat <span style="color:#f92672">=</span> result[<span style="color:#e6db74">&#39;geometry&#39;</span>][<span style="color:#e6db74">&#39;location&#39;</span>][<span style="color:#e6db74">&#39;lat&#39;</span>]
+</span></span><span style="display:flex;"><span>                lng <span style="color:#f92672">=</span> result[<span style="color:#e6db74">&#39;geometry&#39;</span>][<span style="color:#e6db74">&#39;location&#39;</span>][<span style="color:#e6db74">&#39;lng&#39;</span>]
+</span></span><span style="display:flex;"><span>                rating <span style="color:#f92672">=</span> result[<span style="color:#e6db74">&#39;rating&#39;</span>]
+</span></span><span style="display:flex;"><span>                types <span style="color:#f92672">=</span> result[<span style="color:#e6db74">&#39;types&#39;</span>]
+</span></span><span style="display:flex;"><span>                vicinity <span style="color:#f92672">=</span> result[<span style="color:#e6db74">&#39;vicinity&#39;</span>]
+</span></span><span style="display:flex;"><span>                place <span style="color:#f92672">=</span> [name, place_id, lat, lng, rating, types, vicinity]
+</span></span><span style="display:flex;"><span>                all_places<span style="color:#f92672">.</span>append(place)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;next_page_token&#39;</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> jj:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                next_page_token <span style="color:#f92672">=</span> jj[<span style="color:#e6db74">&#39;next_page_token&#39;</span>]
+</span></span><span style="display:flex;"><span>                url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=&#39;</span><span style="color:#f92672">+</span>str(api_key)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&amp;pagetoken=&#39;</span><span style="color:#f92672">+</span>str(next_page_token)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>        labels <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;Place Name&#39;</span>, <span style="color:#e6db74">&#39;Place ID&#39;</span>, <span style="color:#e6db74">&#39;Latitude&#39;</span>, <span style="color:#e6db74">&#39;Longitude&#39;</span>, <span style="color:#e6db74">&#39;Rating&#39;</span>, <span style="color:#e6db74">&#39;Types&#39;</span>, <span style="color:#e6db74">&#39;Vicinity&#39;</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">#    [    0            1            2           3           4          5         6    ]</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># code that exports data to csv file if needed</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># export_dataframe_1_medium = pd.DataFrame.from_records(all_places, columns=labels)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># export_dataframe_1_medium.to_csv(&#39;export_dataframe_1_medium.csv&#39;)</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> len(all_places) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    random_index <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(x,y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    name <span style="color:#f92672">=</span> all_places[random_index][<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    rating <span style="color:#f92672">=</span> all_places[random_index][<span style="color:#ae81ff">4</span>]
+</span></span><span style="display:flex;"><span>    address <span style="color:#f92672">=</span> all_places[random_index][<span style="color:#ae81ff">6</span>]
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># print(&#39;I suggest &#34;{0}&#34; with a rating of {1} at &#34;{2}&#34;&#39;.format(name, rating, address))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;I suggest &#34;</span> <span style="color:#f92672">+</span> str(name) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; with a rating of &#34;</span> <span style="color:#f92672">+</span> str(rating) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; at &#34;</span> <span style="color:#f92672">+</span> str(address)
+</span></span></code></pre></div><h2 id="the-ui">The UI</h2>
 <p>With most of the background work done, I then started work on building a UI for my application. At the time I was thinking it would be neat to put this on an iPhone which led me to BeeWare, a set of tools to write cross platform GUI applications that you can find <a href="https://beeware.org/" title="https://docs.beeware.org/en/latest/index.html#">here</a>.</p>
 <p>Now to be honest, building user interfaces isn’t really my strong suit so I started out easy with the goal of building a simple window with a button that the user can press to suggest a place. BeeWare has some great documentation and I made use of their <a href="https://docs.beeware.org/en/latest/index.html#">getting started guide</a>. I was able to get a very rudimentary UI going with quite literally only a button to push that calls the pickPlace() method from placePicker.py.</p>
-<pre tabindex="0"><code>class Picker(toga.App):
-
-    def startup(self):
-        &#34;&#34;&#34;
-        Construct and show the Toga application.
-
-        Usually, you would add your application to a main content box.
-        We then create a main window (with a name matching the app), and
-        show the main window.
-        &#34;&#34;&#34;
-        main_box = toga.Box()
-        button = toga.Button(&#39;Choose place&#39;, on_press=self.button_handler)
-        button.style.padding = 50
-        button.style.flex = 1
-        main_box.add(button)
-        self.main_window = toga.MainWindow(title=self.formal_name)
-        self.main_window.content = main_box
-        self.main_window.show()
-
-    def button_handler(self, widget):
-        # placePicker.hello()
-        self.main_window.info_dialog(
-            placePicker.pickPlace(),
-            &#39;Thank you!&#39;
-        )
-</code></pre><p><img src="https://marcuskok.tech/wp-content/uploads/2022/01/Screen-Shot-2022-01-21-at-10.05.02-PM.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Picker</span>(toga<span style="color:#f92672">.</span>App):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">startup</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        Construct and show the Toga application.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        Usually, you would add your application to a main content box.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        We then create a main window (with a name matching the app), and
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        show the main window.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        main_box <span style="color:#f92672">=</span> toga<span style="color:#f92672">.</span>Box()
+</span></span><span style="display:flex;"><span>        button <span style="color:#f92672">=</span> toga<span style="color:#f92672">.</span>Button(<span style="color:#e6db74">&#39;Choose place&#39;</span>, on_press<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>button_handler)
+</span></span><span style="display:flex;"><span>        button<span style="color:#f92672">.</span>style<span style="color:#f92672">.</span>padding <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>        button<span style="color:#f92672">.</span>style<span style="color:#f92672">.</span>flex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        main_box<span style="color:#f92672">.</span>add(button)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>main_window <span style="color:#f92672">=</span> toga<span style="color:#f92672">.</span>MainWindow(title<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>formal_name)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>main_window<span style="color:#f92672">.</span>content <span style="color:#f92672">=</span> main_box
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>main_window<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">button_handler</span>(self, widget):
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># placePicker.hello()</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>main_window<span style="color:#f92672">.</span>info_dialog(
+</span></span><span style="display:flex;"><span>            placePicker<span style="color:#f92672">.</span>pickPlace(),
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Thank you!&#39;</span>
+</span></span><span style="display:flex;"><span>        )
+</span></span></code></pre></div><p><img src="https://marcuskok.tech/wp-content/uploads/2022/01/Screen-Shot-2022-01-21-at-10.05.02-PM.png" alt=""></p>
 <p><em>My very simple interface</em></p>
 <p><img src="https://marcuskok.tech/wp-content/uploads/2022/01/Screen-Shot-2022-01-21-at-10.06.18-PM.png" alt=""></p>
 <p><em>Pop up works as intended!</em></p>

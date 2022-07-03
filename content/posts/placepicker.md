@@ -21,7 +21,7 @@ The ipHandler.py file had only one job, and that was to return a city and locati
 
 Documentation from IpInfo was really straightforward and I was able to accomplish this with only five lines (with a commented sixth line for my own debugging purposes)
 
-```
+```python
 access_token = picker.config.access_token
 handler = ipinfo.getHandler(access_token)
 ip_address = get('https://api.ipify.org').content.decode('utf8')
@@ -31,7 +31,7 @@ details = handler.getDetails(ip_address)
 
 Then all I had to do was build two simple functions to return the location from the details object:
 
-```
+```python
 def get_location():
     return details.loc
 
@@ -41,7 +41,7 @@ def get_city():
 
 Moving onto placePicker.py, this is where I pass in a city for my request to the Google Places API from ipHandler.py by calling the get\_city() function I just wrote. Then it’s a simple matter of parsing the JSON response and putting all the restaurants into an array. After that I choose a place using a randomly generated index of the array and print it to the console. I only care about the name, address, and location, so those are the values I print from the places object obtained from the JSON. Information like latitude and longitude can stay hidden from the end user.
 
-```
+```python
 def pickPlace():
     # declare an array of places to choose from
     all_places = []
@@ -102,7 +102,7 @@ With most of the background work done, I then started work on building a UI for 
 
 Now to be honest, building user interfaces isn’t really my strong suit so I started out easy with the goal of building a simple window with a button that the user can press to suggest a place. BeeWare has some great documentation and I made use of their [getting started guide](https://docs.beeware.org/en/latest/index.html#). I was able to get a very rudimentary UI going with quite literally only a button to push that calls the pickPlace() method from placePicker.py.
 
-```
+```python
 class Picker(toga.App):
 
     def startup(self):
