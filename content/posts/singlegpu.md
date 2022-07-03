@@ -7,7 +7,6 @@ Recently I made the move to [Arch Linux](https://wiki.archlinux.org/title/Arch_L
 
 -   Previously I had installed Arch on my old laptop and enjoyed the experience of having complete control over my OS
 -   I’ve found that recently I’ve been spending less time playing games on my desktop and with the recent release of the Steam Deck it seemed like the right time for me to jump ship.
--   Playing with a Linux install is my idea of fun these days sadly.
 
 However, there was one thing that held me back. I’ve been addicted to League of Legends since high school and even though there’s methods to run the game on Linux via Wine, from my experience it simply did not work.
 
@@ -53,7 +52,7 @@ Note: while I don’t remember the exact parameter I passed into my grub config 
 
 Use this script for viewing the groups – either copy/paste into the terminal or run as executable:
 
-```
+```bash
 #!/bin/bash
 shopt -s nullglob
 for g in $(find /sys/kernel/iommu_groups/* -maxdepth 0 -type d | sort -V); do
@@ -66,7 +65,7 @@ done;
 
 You are looking for your graphics card group. Since I am using a RX580 my group was this:
 
-```
+```bash
 IOMMU Group 15:
     07:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere [Radeon RX 470/480/570/570X/580/580X/590] [1002:67df] (rev e7)
     07:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] [1002:aaf0]
@@ -83,7 +82,7 @@ There are lots of examples for start and revert scripts written by other people 
 
 start.sh
 
-```
+```bash
 #!/bin/bash
 # Helpful to read output when debugging
 set -x
@@ -119,7 +118,7 @@ modprobe vfio_iommu_type1
 
 revert.sh
 
-```
+```bash
 #!/bin/bash
 set -x
 
