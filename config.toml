@@ -15,11 +15,6 @@ enableEmoji = 'true'
         name = "About"
         url = "/about/"
         weight = 1
-    [[menu.main]]
-        identifier = "resume"
-        name = "CV"
-        url = "/resume/"
-        weight = 1
 
 [params]
     author = 'MarcusK'
